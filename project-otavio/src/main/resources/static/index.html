@@ -4,10 +4,8 @@
     <meta charset="utf-8"/>
     <meta charset="ISO-8859-1">
     <title>Sistema de Cadastro</title>
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
     <style type="text/css">
         body {
             background-color: #f8f9fa; /* Fundo suave */
@@ -18,14 +16,12 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
         }
-
         h3 {
             color: #007bff; /* Azul chamativo */
             text-align: center;
             margin-bottom: 20px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Sombra sutil */
         }
-
         .form-container {
             background-color: #ffffff; /* Branco para o formulário */
             padding: 25px;
@@ -35,11 +31,9 @@
             max-width: 400px; /* Reduzido para otimizar espaço */
             transition: transform 0.3s; /* Transição suave */
         }
-
         .form-container:hover {
             transform: translateY(-5px); /* Efeito de flutuação ao passar o mouse */
         }
-
         .btn-custom {
             background-color: #28a745; /* Verde para o botão de salvar */
             color: white;
@@ -48,69 +42,56 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Sombra dos botões */
             transition: background-color 0.3s, transform 0.2s;
         }
-
         .btn-custom:hover {
             background-color: #218838; /* Verde mais escuro ao passar o mouse */
             transform: translateY(-2px); /* Efeito de flutuação */
         }
-
         .btn-secondary, .btn-danger, .btn-warning {
             border-radius: 5px; /* Bordas arredondadas */
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s;
         }
-
         .btn-secondary:hover, .btn-danger:hover, .btn-warning:hover {
             transform: translateY(-2px); /* Efeito de flutuação */
         }
-
         .modal-header {
             background-color: #007bff; /* Azul no cabeçalho do modal */
             color: white;
             border-bottom: 2px solid #0056b3; /* Borda inferior */
         }
-
         .modal-footer {
             border-top: 1px solid #007bff;
         }
-
         .table th {
             background-color: #007bff; /* Azul para o cabeçalho da tabela */
             color: white;
         }
-
         .table td {
             vertical-align: middle;
         }
-
         .alert {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
-
         .btn-success {
             background-color: #ffc107; /* Amarelo chamativo */
             border: none;
             transition: background-color 0.3s;
         }
-
         .btn-success:hover {
             background-color: #e0a800; /* Amarelo mais escuro ao passar o mouse */
         }
-
         .id-container {
             display: flex;
             justify-content: space-between; /* Espaço entre o label e o ID */
             align-items: center;
             margin-bottom: 10px; /* Espaço abaixo */
         }
-
         .id-label {
             margin-left: 50px; /* Ajusta a distância do "ID:" em relação ao nome */
             
         }
     </style>
 </head>
-
 <body>
     <div class="form-container">
         <h3>Sistema de Cadastro de Usuários</h3>
@@ -124,21 +105,18 @@
             <div class="mb-3">
                 <input type="text" class="form-control" id="nome" placeholder="Informe o Nome:" required="required">
             </div>
-
             <div class="mb-3">
                 <label for="idade" class="form-label">Idade:</label>
                 <input type="number" class="form-control" id="idade" placeholder="Informe a Idade:" required>
             </div>
         </form>
-
         <div class="text-center">
             <button type="button" class="btn btn-custom" onclick="salvarUsuario()">Salvar</button>
-            <button type="button" class="btn btn-secondary" onclick="document.getElementById('formCadastroUser').reset();">Novo</button>
+			<button type="button" class="btn btn-secondary" onclick="resetarFormulario()">Novo</button>
             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalPesquisarUser">Pesquisar</button>
             <button type="button" class="btn btn-warning" onclick="botaoDeletarDaTela();">Deletar</button>
         </div>
     </div>
-
     <div class="modal fade" id="modalPesquisarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -154,7 +132,6 @@
                         </div>
                         <button type="button" class="btn btn-success" onclick="pesquisarUser()">Buscar</button>
                     </form>
-
                     <div style="height: 300px; overflow: scroll;">
                         <table class="table" id="tabelaresultados">
                             <thead>
@@ -176,20 +153,16 @@
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-
     <script type="text/javascript">
         function botaoDeletarDaTela() {
             var id = $('#id').val();
-
             if (id != null && id.trim() != '') {
                 deleteUser(id);
                 document.getElementById('formCadastroUser').reset();
             }
         }
-
         function deleteUser(id) {
             if (confirm('Deseja realmente deletar?')) {
                 $.ajax({
@@ -205,10 +178,8 @@
                 });
             }
         }
-
         function pesquisarUser() {
             var nome = $('#nameBusca').val();
-
             if (nome != null && nome.trim() != '') {
                 $.ajax({
                     method: "GET",
@@ -216,7 +187,6 @@
                     data: "name=" + nome,
                     success: function (response) {
                         $('#tabelaresultados > tbody > tr').remove();
-
                         for (var i = 0; i < response.length; i++) {
                             $('#tabelaresultados > tbody').append('<tr id="' + response[i].id + '"><td>' + response[i].id + '</td><td>' + response[i].nome + '</td><td><button type="button" onclick="colocarEmEdicao(' + response[i].id + ')" class="btn btn-primary">Ver</button></td><td><button type="button" onclick="botaoDeletarDaTela(' + response[i].id + ')" class="btn btn-danger">Deletar</button></td></tr>');
                         }
@@ -226,7 +196,6 @@
                 });
             }
         }
-
         function colocarEmEdicao(id) {
             $.ajax({
                 method: "GET",
@@ -243,24 +212,27 @@
                 alert("Erro ao buscar usuario por id: " + xhr.responseText);
             });
         }
-
+		
+		function resetarFormulario() {
+		        document.getElementById('formCadastroUser').reset(); // Limpa todos os campos
+		        $("#id").val(''); // Limpa o valor do campo ID
+		        $("#idDisplay").text('0'); // Atualiza a exibição do ID para 0
+		    }
+		
         function salvarUsuario() {
             var id = $("#id").val();
             var nome = $("#nome").val();
             var idade = $("#idade").val();
-
             if (nome == null || nome.trim() == '') {
                 $("#nome").focus();
                 alert('Informe o nome');
                 return;
             }
-
             if (idade == null || idade.trim() == '') {
                 $("#idade").focus();
                 alert('Informe a idade');
                 return;
             }
-
             $.ajax({
                 method: "POST",
                 url: "salvar",
