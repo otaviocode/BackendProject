@@ -1,255 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="utf-8"/>
-    <meta charset="ISO-8859-1">
-    <title>Sistema de Cadastro</title>
-    <!-- Bootstrap CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Cadastro de Usuários</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <style type="text/css">
+    <style>
         body {
-            background-color: #f8f9fa; /* Fundo suave */
+            background-image: url('5590457.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff; /* Cor do texto principal */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-        }
-        h3 {
-            color: #007bff; /* Azul chamativo */
-            text-align: center;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+            font-family: Arial, sans-serif;
         }
         .form-container {
-            background-color: #ffffff; /* Branco para o formulário */
-            padding: 25px;
-            border-radius: 15px; /* Bordas arredondadas */
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); /* Sombra do cartão */
-            width: 100%;
-            max-width: 400px; /* Reduzido para otimizar espaço */
-            transition: transform 0.3s; /* Transição suave */
+            background-color: rgba(255, 255, 255, 0); /* Fundo transparente */
+            padding: 15px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            transition: transform 0.3s;
+        }
+        h3 {
+            color: #0d1f30; /* Cor do título */
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .form-label {
+            color: #112233; /* Cor dos rótulos dos campos */
+        }
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.15); /* Fundo semi-transparente dos campos de entrada */
+            color: #0d1f30; /* Cor do texto dos campos de entrada */
+            border: 1px solid #112233; /* Borda dos campos */
+        }
+        .form-control::placeholder {
+            color: #ddd; /* Cor do placeholder */
         }
         .form-container:hover {
-            transform: translateY(-5px); /* Efeito de flutuação ao passar o mouse */
+            transform: translateY(-5px);
         }
         .btn-custom {
-            background-color: #28a745; /* Verde para o botão de salvar */
+            background-color: #28a745;
             color: white;
-            border: none;
-            border-radius: 5px; /* Bordas arredondadas */
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Sombra dos botões */
-            transition: background-color 0.3s, transform 0.2s;
-        }
-        .btn-custom:hover {
-            background-color: #218838; /* Verde mais escuro ao passar o mouse */
-            transform: translateY(-2px); /* Efeito de flutuação */
-        }
-        .btn-secondary, .btn-danger, .btn-warning {
-            border-radius: 5px; /* Bordas arredondadas */
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s;
-        }
-        .btn-secondary:hover, .btn-danger:hover, .btn-warning:hover {
-            transform: translateY(-2px); /* Efeito de flutuação */
-        }
-        .modal-header {
-            background-color: #007bff; /* Azul no cabeçalho do modal */
-            color: white;
-            border-bottom: 2px solid #0056b3; /* Borda inferior */
-        }
-        .modal-footer {
-            border-top: 1px solid #007bff;
-        }
-        .table th {
-            background-color: #007bff; /* Azul para o cabeçalho da tabela */
-            color: white;
-        }
-        .table td {
-            vertical-align: middle;
-        }
-        .alert {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        }
-        .btn-success {
-            background-color: #ffc107; /* Amarelo chamativo */
+            width: 100%;
             border: none;
             transition: background-color 0.3s;
         }
-        .btn-success:hover {
-            background-color: #e0a800; /* Amarelo mais escuro ao passar o mouse */
+        .btn-custom:hover {
+            background-color: #218838;
         }
-        .id-container {
+        .btn-menu {
+            border-radius: 5px;
+            margin: 0 5px;
+            flex: 1;
+            font-size: 0.85rem;
+            padding: 6px;
+        }
+        .modal-header {
+            background-color: #555555;
+            color: #fff;
+        }
+        .table th {
+            background-color: #777777;
+            color: #fff;
+        }
+        .button-group {
             display: flex;
-            justify-content: space-between; /* Espaço entre o label e o ID */
-            align-items: center;
-            margin-bottom: 10px; /* Espaço abaixo */
-        }
-        .id-label {
-            margin-left: 50px; /* Ajusta a distância do "ID:" em relação ao nome */
-            
+            justify-content: space-around;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
         <h3>Sistema de Cadastro de Usuários</h3>
-        <form action="" id="formCadastroUser">
-            <div class="mb-3 id-container">
-                <label for="nome" class="form-label">Nome do usuário:</label>
-                <span class="id-label">ID:</span>
-                <span id="idDisplay" style="margin-right:120px;">0</span> <!-- ID à direita -->
+        <form id="formCadastroUser">
+            <div class="mb-2">
+                <label for="nome" class="form-label">Nome do Usuário:</label>
+                <input type="text" class="form-control" id="nome" placeholder="Informe o Nome" required>
             </div>
-            <input type="hidden" id="id"> <!-- Campo de ID escondido -->
-            <div class="mb-3">
-                <input type="text" class="form-control" id="nome" placeholder="Informe o Nome:" required="required">
-            </div>
-            <div class="mb-3">
+            <div class="mb-2">
                 <label for="idade" class="form-label">Idade:</label>
-                <input type="number" class="form-control" id="idade" placeholder="Informe a Idade:" required>
+                <input type="number" class="form-control" id="idade" placeholder="Informe a Idade" required>
+            </div>
+            <div class="mb-2">
+                <label for="endereco" class="form-label">Endereço:</label>
+                <input type="text" class="form-control" id="endereco" placeholder="Rua, Avenida, etc." required>
+            </div>
+            <div class="mb-2">
+                <label for="cep" class="form-label">CEP:</label>
+                <input type="text" class="form-control" id="cep" placeholder="Informe o CEP" required>
+            </div>
+            <div class="mb-2">
+                <label for="numero" class="form-label">Número:</label>
+                <input type="text" class="form-control" id="numero" placeholder="Número da residência" required>
+            </div>
+            <div class="mb-2">
+                <label for="complemento" class="form-label">Complemento:</label>
+                <input type="text" class="form-control" id="complemento" placeholder="Complemento (opcional)">
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn btn-success btn-menu" onclick="salvarUsuario()">Salvar</button>
+                <button type="button" class="btn btn-secondary btn-menu" onclick="resetarFormulario()">Novo</button>
+                <button type="button" class="btn btn-danger btn-menu" data-bs-toggle="modal" data-bs-target="#modalPesquisarUser">Pesquisar</button>
+                <button type="button" class="btn btn-warning btn-menu" onclick="botaoDeletarDaTela()">Deletar</button>
             </div>
         </form>
-        <div class="text-center">
-            <button type="button" class="btn btn-custom" onclick="salvarUsuario()">Salvar</button>
-			<button type="button" class="btn btn-secondary" onclick="resetarFormulario()">Novo</button>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalPesquisarUser">Pesquisar</button>
-            <button type="button" class="btn btn-warning" onclick="botaoDeletarDaTela();">Deletar</button>
-        </div>
     </div>
+
+    <!-- Modal de Pesquisa -->
     <div class="modal fade" id="modalPesquisarUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Pesquisa de usuário</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Pesquisa de Usuário</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="nameBusca" class="col-form-label">Informe o nome:</label>
-                            <input type="text" class="form-control" id="nameBusca">
-                        </div>
-                        <button type="button" class="btn btn-success" onclick="pesquisarUser()">Buscar</button>
-                    </form>
-                    <div style="height: 300px; overflow: scroll;">
-                        <table class="table" id="tabelaresultados">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Editar</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
+                    <div class="mb-3">
+                        <label for="nameBusca" class="form-label">Informe o Nome:</label>
+                        <input type="text" class="form-control" id="nameBusca">
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-success" onclick="pesquisarUser()">Buscar</button>
+                    <table class="table mt-3" id="tabelaresultados">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        function botaoDeletarDaTela() {
-            var id = $('#id').val();
-            if (id != null && id.trim() != '') {
-                deleteUser(id);
-                document.getElementById('formCadastroUser').reset();
-            }
-        }
-        function deleteUser(id) {
-            if (confirm('Deseja realmente deletar?')) {
-                $.ajax({
-                    method: "DELETE",
-                    url: "delete",
-                    data: "iduser=" + id,
-                    success: function (response) {
-                        $('#' + id).remove();
-                        alert(response);
-                    }
-                }).fail(function (xhr, status, errorThrown) {
-                    alert("Erro ao deletar usuario por id: " + xhr.responseText);
-                });
-            }
-        }
-        function pesquisarUser() {
-            var nome = $('#nameBusca').val();
-            if (nome != null && nome.trim() != '') {
-                $.ajax({
-                    method: "GET",
-                    url: "buscarPorNome",
-                    data: "name=" + nome,
-                    success: function (response) {
-                        $('#tabelaresultados > tbody > tr').remove();
-                        for (var i = 0; i < response.length; i++) {
-                            $('#tabelaresultados > tbody').append('<tr id="' + response[i].id + '"><td>' + response[i].id + '</td><td>' + response[i].nome + '</td><td><button type="button" onclick="colocarEmEdicao(' + response[i].id + ')" class="btn btn-primary">Ver</button></td><td><button type="button" onclick="botaoDeletarDaTela(' + response[i].id + ')" class="btn btn-danger">Deletar</button></td></tr>');
-                        }
-                    }
-                }).fail(function (xhr, status, errorThrown) {
-                    alert("Erro ao buscar usuarios: " + xhr.responseText);
-                });
-            }
-        }
-        function colocarEmEdicao(id) {
-            $.ajax({
-                method: "GET",
-                url: "buscaruserid",
-                data: "iduser=" + id,
-                success: function (response) {
-                    $("#id").val(response.id);
-                    $("#idDisplay").text(response.id); // Atualiza a exibição do ID
-                    $("#nome").val(response.nome);
-                    $("#idade").val(response.idade);
-                    $('#modalPesquisarUser').modal('hide');
-                }
-            }).fail(function (xhr, status, errorThrown) {
-                alert("Erro ao buscar usuario por id: " + xhr.responseText);
-            });
-        }
-		function resetarFormulario() {
-		        document.getElementById('formCadastroUser').reset(); // Limpa todos os campos
-		        $("#id").val(''); // Limpa o valor do campo ID
-		        $("#idDisplay").text('0'); // Atualiza a exibição do ID para 0
-		    }
-		
-        function salvarUsuario() {
-            var id = $("#id").val();
-            var nome = $("#nome").val();
-            var idade = $("#idade").val();
-            if (nome == null || nome.trim() == '') {
-                $("#nome").focus();
-                alert('Informe o nome');
-                return;
-            }
-            if (idade == null || idade.trim() == '') {
-                $("#idade").focus();
-                alert('Informe a idade');
-                return;
-            }
-            $.ajax({
-                method: "POST",
-                url: "salvar",
-                data: JSON.stringify({
-                    id: id,
-                    nome: nome,
-                    idade: idade
-                }),
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    $("#id").val(response.id);
-                    $("#idDisplay").text(response.id); // Atualiza a exibição do ID
-                    alert("Gravou com sucesso!");
-                }
-            }).fail(function (xhr, status, errorThrown) {
-                alert("Erro ao salvar usuario: " + xhr.responseText);
-            });
-        }
-    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
