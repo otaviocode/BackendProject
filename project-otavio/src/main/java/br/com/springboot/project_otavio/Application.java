@@ -4,7 +4,8 @@ package br.com.springboot.project_otavio;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+
+@SpringBootApplication(scanBasePackages = "br.com.springboot.project_otavio")
 public class Application {
 	
 	//Main é um método auto executável em Java
