@@ -1,6 +1,5 @@
 //pacote a que tudo pertence
 package br.com.springboot.project_otavio;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
